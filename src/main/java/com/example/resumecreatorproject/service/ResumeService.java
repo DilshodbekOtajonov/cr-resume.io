@@ -4,6 +4,8 @@ import com.example.resumecreatorproject.dto.ResumeCreateDTO;
 import com.example.resumecreatorproject.dto.ResumeDTO;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 /**
  * @author "Otajonov Dilshodbek
  * @since 10/25/22 8:31 PM (Tuesday)
@@ -14,5 +16,5 @@ import org.springframework.stereotype.Service;
 public interface ResumeService {
     ResumeDTO create(ResumeCreateDTO dto);
 
-    byte[] generateAsPDF(Long resumeId);
+    byte[] generateAsPDF(Long resumeId) throws IOException;
 }

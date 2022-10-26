@@ -45,7 +45,7 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public byte[] generateAsPDF(Long resumeId) {
+    public byte[] generateAsPDF(Long resumeId) throws IOException {
         Resume resume = resumeRepository.getReferenceById(resumeId);
         Template template = TemplateUtils.getTemplate(resume.getTemplateName());
         try (FileOutputStream pdfStream = new FileOutputStream("resume.pdf");) {
@@ -67,7 +67,7 @@ public class ResumeServiceImpl implements ResumeService {
         } catch (TemplateException e) {
             e.printStackTrace();
             throw new RuntimeException("Template not found");
-        }finally {
+        } finally {
             try {
                 Files.deleteIfExists(Path.of("resume.pdf"));
             } catch (IOException e) {

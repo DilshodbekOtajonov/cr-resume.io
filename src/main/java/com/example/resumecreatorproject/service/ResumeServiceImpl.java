@@ -67,8 +67,12 @@ public class ResumeServiceImpl implements ResumeService {
         } catch (TemplateException e) {
             e.printStackTrace();
             throw new RuntimeException("Template not found");
-        } finally {
-            Files.deleteIfExists(Path.of("resume.pdf"));
+        }finally {
+            try {
+                Files.deleteIfExists(Path.of("resume.pdf"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

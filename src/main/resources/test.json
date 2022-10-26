@@ -1,0 +1,59 @@
+{
+  "header": {
+    "fullName": "Dilshodbek Otajonov",
+    "address": "toshkent",
+    "country": "Uz",
+    "job": "Java-developer",
+    "phoneNumber": "+998996635036",
+    "email": "dilshodbekotajonov",
+    "site": "t.me/dilshodbekOtajonov"
+  },
+  "templateName": "Template-1",
+  "about": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia quas vel sint commodi repudiandae consequuntur voluptatum laborumnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium,eaque rerum Provident similique accusantium nemo autem. Veritatis",
+  "skills": [
+    {
+      "name": "java",
+      "progress": "80"
+    },
+    {
+      "name": "string",
+      "progress": "90"
+    },
+    {
+      "name": "string",
+      "progress": "70"
+    },
+    {
+      "name": "string",
+      "progress": "10"
+    },
+    {
+      "name": "string",
+      "progress": "55"
+    },
+    {
+      "name": "string",
+      "progress": "67"
+    }
+  ],
+  "socialMediaAccounts": [
+    {
+      "name": "telegram",
+      "url": "t.me/dilshodbekOtajonov"
+    }
+  ],
+  "educations": [
+    {
+      "date": "2020-2024",
+      "name": "WIUT",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis"
+    }
+  ],
+  "experiences": [
+    {
+      "date": "2020-2021",
+      "company": "Telecom",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis"
+    }
+  ]
+}

@@ -60,7 +60,6 @@ public class ResumeServiceImpl implements ResumeService {
             FileInputStream fileInputStream = new FileInputStream("resume.pdf");
             byte[] response = fileInputStream.readAllBytes();
             fileInputStream.close();
-            Files.deleteIfExists(Path.of("resume.pdf"));
             return response;
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,6 +67,8 @@ public class ResumeServiceImpl implements ResumeService {
         } catch (TemplateException e) {
             e.printStackTrace();
             throw new RuntimeException("Template not found");
+        } finally {
+            Files.deleteIfExists(Path.of("resume.pdf"));
         }
     }
 }

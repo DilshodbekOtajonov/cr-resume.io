@@ -3,6 +3,9 @@
 
 This is a project for automating resume creation for free
 
+## Test before pulling it
+you can test endpoints: http://164.92.229.130:8080/swagger-ui/index.html
+
 ## Getting Started
 
 Clone the project and run localhost:8080/swagger-ui/index.html. You will see bunch of api endpoints. To get started working with api, There is a json file named test.json, run endpoint "/resume/create"

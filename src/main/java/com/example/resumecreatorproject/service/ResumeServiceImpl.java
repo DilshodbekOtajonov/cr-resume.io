@@ -20,6 +20,8 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 
 /**
@@ -58,6 +60,7 @@ public class ResumeServiceImpl implements ResumeService {
             FileInputStream fileInputStream = new FileInputStream("resume.pdf");
             byte[] response = fileInputStream.readAllBytes();
             fileInputStream.close();
+            Files.deleteIfExists(Path.of("resume.pdf"));
             return response;
         } catch (IOException e) {
             e.printStackTrace();

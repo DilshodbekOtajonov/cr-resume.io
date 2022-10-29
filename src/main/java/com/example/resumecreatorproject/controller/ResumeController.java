@@ -1,16 +1,23 @@
 package com.example.resumecreatorproject.controller;
 
-import com.example.resumecreatorproject.dto.ResumeCreateDTO;
-import com.example.resumecreatorproject.dto.ResumeDTO;
-import com.example.resumecreatorproject.service.ResumeService;
+import com.example.resumecreatorproject.domains.Picture;
+import com.example.resumecreatorproject.dto.resume.ResumeCreateDTO;
+import com.example.resumecreatorproject.dto.resume.ResumeDTO;
+import com.example.resumecreatorproject.service.file.FileService;
+import com.example.resumecreatorproject.service.resume.ResumeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * @author "Otajonov Dilshodbek
@@ -24,11 +31,19 @@ import java.io.IOException;
 public class ResumeController {
     private final ResumeService resumeService;
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<ResumeDTO> generateResume(@RequestBody ResumeCreateDTO dto) {
         ResumeDTO response = resumeService.create(dto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @PostMapping(value = "/uploadPicture", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Picture> uploadPicture(@RequestParam("file") MultipartFile file, @RequestParam Long resumeId) {
+        Picture picture = resumeService.attachPicture(file, resumeId);
+        return new ResponseEntity<>(picture, HttpStatus.CREATED);
+    }
+
 
     @GetMapping(value = "/generateAsPDF")
     public ResponseEntity<byte[]> generateAsPDF(@RequestParam Long resumeId) throws IOException {
@@ -40,5 +55,12 @@ public class ResumeController {
                 .header(HttpHeaders.CONTENT_DISPOSITION,
                         "attachment; filename=\"" + fileName + "\"")
                 .body(bytes);
+    }
+
+    @GetMapping(value = "/getImage")
+    public void getImage(@RequestParam String imagePath, HttpServletResponse response) throws IOException {
+        Path path = Path.of(imagePath);
+        ServletOutputStream outputStream = response.getOutputStream();
+        Files.copy(path, outputStream);
     }
 }

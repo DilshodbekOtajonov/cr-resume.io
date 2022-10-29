@@ -1,8 +1,8 @@
 package com.example.resumecreatorproject.mappers;
 
 import com.example.resumecreatorproject.domains.Resume;
-import com.example.resumecreatorproject.dto.ResumeCreateDTO;
-import com.example.resumecreatorproject.dto.ResumeDTO;
+import com.example.resumecreatorproject.dto.resume.ResumeCreateDTO;
+import com.example.resumecreatorproject.dto.resume.ResumeDTO;
 import org.mapstruct.Mapper;
 
 /**

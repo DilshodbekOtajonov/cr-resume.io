@@ -1,26 +1,18 @@
-package com.example.resumecreatorproject.domains;
+package com.example.resumecreatorproject.dto.header;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
-import javax.persistence.*;
 
 /**
  * @author "Otajonov Dilshodbek
- * @since 10/26/22 11:39 AM (Wednesday)
+ * @since 10/29/22 1:45 PM (Saturday)
  * ResumeCreatorProject/IntelliJ IDEA
  */
-
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Entity
-public class Header {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class HeaderCreateDTO {
     private String fullName;
     private String address;
     private String country;
@@ -28,5 +20,4 @@ public class Header {
     private String phoneNumber;
     private String email;
     private String site;
-
 }

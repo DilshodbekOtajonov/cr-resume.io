@@ -23,7 +23,5 @@ public class Skill {
     private Long id;
     private String name;
     private byte progress;
-    @ManyToOne
-    @JsonIgnore
-    private Resume resume;
+
 }

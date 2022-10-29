@@ -23,7 +23,5 @@ public class SocialMediaAccount {
     private Long id;
     private String name;
     private String url;
-    @ManyToOne
-    @JsonIgnore
-    private Resume resume;
+
 }

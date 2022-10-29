@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Template-1</title>
     <style>
-        @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap");
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
 
         * {
             margin: 0;
@@ -51,7 +51,7 @@
 
         .resume .resume_left .resume_profile img {
             width: 100%;
-            height: 100%;
+            height: 300px;
         }
 
         .resume .resume_left .resume_content {
@@ -122,7 +122,7 @@
         }
 
         .resume .resume_left .resume_skills ul li .skill_name {
-            width: 25%;
+            width: 60%;
         }
 
         .resume .resume_left .resume_skills ul li .skill_progress {
@@ -245,7 +245,7 @@
 <div class="resume">
     <div class="resume_left">
         <div class="resume_profile">
-            <img src="https://i.imgur.com/eCijVBe.png" alt="profile_pic">
+            <img src="${resume.picture.path}" alt="profile_pic">
         </div>
         <div class="resume_content">
             <div class="resume_item resume_info">
@@ -255,33 +255,21 @@
                 </div>
                 <ul>
                     <li>
-                        <div class="icon">
-                            <i class="fas fa-map-signs"></i>
-                        </div>
                         <div class="data">
                             ${resume.header.address}/${resume.header.country}
                         </div>
                     </li>
                     <li>
-                        <div class="icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
                         <div class="data">
                             ${resume.header.phoneNumber}
                         </div>
                     </li>
                     <li>
-                        <div class="icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
                         <div class="data">
                             ${resume.header.email}
                         </div>
                     </li>
                     <li>
-                        <div class="icon">
-                            <i class="fab fa-weebly"></i>
-                        </div>
                         <div class="data">
                             ${resume.header.site}
                         </div>
@@ -298,10 +286,6 @@
                             <div class="skill_name">
                                 ${skill.name}
                             </div>
-                            <div class="skill_progress">
-                                <span style="width: ${skill.progress}%;"></span>
-                            </div>
-                            <div class="skill_per">${skill.progress}%</div>
                         </li>
                     </#list>
                 </ul>
@@ -313,9 +297,6 @@
                 <ul>
                     <#list resume.socialMediaAccounts as social>
                         <li>
-                            <div class="icon">
-                                <i class="fab fa-${social.name}-square"></i>
-                            </div>
                             <div class="data">
                                 <p class="semi-bold">${social.name}</p>
                                 <p>${social.url}</p>
@@ -365,17 +346,23 @@
                 </#list>
             </ul>
         </div>
-        <div class="resume_item resume_hobby">
+
+        <div class="resume_item resume_education">
             <div class="title">
-                <p class="bold">Hobby</p>
+                <p class="bold">Language</p>
             </div>
             <ul>
-                <li><i class="fas fa-book"></i></li>
-                <li><i class="fas fa-gamepad"></i></li>
-                <li><i class="fas fa-music"></i></li>
-                <li><i class="fab fa-pagelines"></i></li>
+                <#list resume.languages as language>
+                    <li>
+                        <div class="date">${language.name}</div>
+                        <div class="info">
+                            <p class="semi-bold">${language.proficiency.description}</p>
+                        </div>
+                    </li>
+                </#list>
             </ul>
         </div>
+
     </div>
 </div>
 </body>

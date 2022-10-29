@@ -1,4 +1,4 @@
-package com.example.resumecreatorproject.dto;
+package com.example.resumecreatorproject.dto.resume;
 
 import com.example.resumecreatorproject.domains.*;
 import lombok.*;

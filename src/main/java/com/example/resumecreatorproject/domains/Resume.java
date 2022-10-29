@@ -25,6 +25,7 @@ public class Resume {
     @OneToOne(cascade = CascadeType.ALL)
     private Header header;
     private String templateName;
+    @Column(columnDefinition = "text")
     private String about;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Skill> skills;
@@ -34,5 +35,8 @@ public class Resume {
     private List<Education> educations;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Experience> experiences;
-
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Language> languages;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Picture picture;
 }

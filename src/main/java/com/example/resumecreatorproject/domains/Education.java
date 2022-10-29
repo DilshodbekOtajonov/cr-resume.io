@@ -22,8 +22,6 @@ public class Education {
     private Long id;
     private String date;
     private String name;
+    @Column(columnDefinition = "text")
     private String description;
-    @ManyToOne
-    @JsonIgnore
-    private Resume resume;
 }

@@ -1,13 +1,16 @@
-package com.example.resumecreatorproject.service;
+package com.example.resumecreatorproject.service.resume;
 
+import com.example.resumecreatorproject.domains.Picture;
 import com.example.resumecreatorproject.domains.Resume;
-import com.example.resumecreatorproject.dto.ResumeCreateDTO;
-import com.example.resumecreatorproject.dto.ResumeDTO;
+import com.example.resumecreatorproject.dto.resume.ResumeCreateDTO;
+import com.example.resumecreatorproject.dto.resume.ResumeDTO;
 import com.example.resumecreatorproject.mappers.ResumeMapper;
 import com.example.resumecreatorproject.repository.ResumeRepository;
+import com.example.resumecreatorproject.service.file.FileService;
 import com.example.resumecreatorproject.utils.TemplateUtils;
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
+import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -16,10 +19,9 @@ import freemarker.template.TemplateException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
@@ -35,9 +37,11 @@ import java.util.Map;
 public class ResumeServiceImpl implements ResumeService {
     private final ResumeMapper resumeMapper;
     private final ResumeRepository resumeRepository;
+    private final FileService fileService;
 
     @Override
     public ResumeDTO create(ResumeCreateDTO dto) {
+
         Resume resume = resumeMapper.fromCreateDTO(dto);
         Resume savedResume = resumeRepository.save(resume);
         ResumeDTO response = resumeMapper.fromResume(savedResume);
@@ -51,11 +55,12 @@ public class ResumeServiceImpl implements ResumeService {
         try (FileOutputStream pdfStream = new FileOutputStream("resume.pdf");) {
             String responsePage = FreeMarkerTemplateUtils.processTemplateIntoString(template,
                     Map.of("resume", resume));
+            System.out.println(responsePage);
             PdfWriter pdfWriter = new PdfWriter(pdfStream);
             PdfDocument document = new PdfDocument(pdfWriter);
-            document.setDefaultPageSize(new PageSize(800f, 1200f));
+            document.setDefaultPageSize(new PageSize(850f, 1200f));
             ConverterProperties converterProperties = new ConverterProperties();
-            converterProperties.setBaseUri("https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap");
+            converterProperties.setFontProvider(new DefaultFontProvider(true, true, true));
             HtmlConverter.convertToPdf(responsePage, document, converterProperties);
             FileInputStream fileInputStream = new FileInputStream("resume.pdf");
             byte[] response = fileInputStream.readAllBytes();
@@ -74,5 +79,14 @@ public class ResumeServiceImpl implements ResumeService {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public Picture attachPicture(MultipartFile file, Long resumeId) {
+        Picture picture = fileService.uploadPicture(file);
+        Resume resume = resumeRepository.findById(resumeId).orElseThrow(() -> new RuntimeException("Resume not found id=" + resumeId));
+        resume.setPicture(picture);
+        resumeRepository.save(resume);
+        return picture;
     }
 }

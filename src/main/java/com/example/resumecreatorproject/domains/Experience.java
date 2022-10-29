@@ -23,8 +23,6 @@ public class Experience {
     private Long id;
     private String date;
     private String company;
+    @Column(columnDefinition = "text")
     private String description;
-    @ManyToOne
-    @JsonIgnore
-    private Resume resume;
 }

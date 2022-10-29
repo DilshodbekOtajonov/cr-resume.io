@@ -57,10 +57,5 @@ public class ResumeController {
                 .body(bytes);
     }
 
-    @GetMapping(value = "/getImage")
-    public void getImage(@RequestParam String imagePath, HttpServletResponse response) throws IOException {
-        Path path = Path.of(imagePath);
-        ServletOutputStream outputStream = response.getOutputStream();
-        Files.copy(path, outputStream);
-    }
+
 }

@@ -1,6 +1,5 @@
 package com.example.resumecreatorproject.dto.resume;
 
-import com.example.resumecreatorproject.domains.*;
 import com.example.resumecreatorproject.dto.education.EducationCreateDTO;
 import com.example.resumecreatorproject.dto.experience.ExperienceCreateDTO;
 import com.example.resumecreatorproject.dto.header.HeaderCreateDTO;
@@ -10,9 +9,6 @@ import com.example.resumecreatorproject.dto.socialAccount.SocialMediaAccountCrea
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.List;
 
 /**

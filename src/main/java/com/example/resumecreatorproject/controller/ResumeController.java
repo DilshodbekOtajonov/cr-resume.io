@@ -3,7 +3,6 @@ package com.example.resumecreatorproject.controller;
 import com.example.resumecreatorproject.domains.Picture;
 import com.example.resumecreatorproject.dto.resume.ResumeCreateDTO;
 import com.example.resumecreatorproject.dto.resume.ResumeDTO;
-import com.example.resumecreatorproject.service.file.FileService;
 import com.example.resumecreatorproject.service.resume.ResumeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -13,11 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * @author "Otajonov Dilshodbek
@@ -31,7 +26,7 @@ import java.nio.file.Path;
 public class ResumeController {
     private final ResumeService resumeService;
 
-    @PostMapping(value = "/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value = "/create")
     public ResponseEntity<ResumeDTO> generateResume(@RequestBody ResumeCreateDTO dto) {
         ResumeDTO response = resumeService.create(dto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
